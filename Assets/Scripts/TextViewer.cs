@@ -3,22 +3,33 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(Counter))]
 public class TextViewer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text;
-    
+    [SerializeField] private Counter _counter;
+
     private readonly string _defaultText = "0";
 
-    void Awake()
+    private void Awake()
     {
-        Counter counter = GetComponent<Counter>();
-        counter.OnValueChange += UpdateText;
+        if (_counter != null)
+        {
+            _counter.ValueChanged += UpdateText;
+        }
+
         _text.text = _defaultText;
     }
 
     private void UpdateText(int value)
     {
         _text.text = value.ToString();
+    }
+
+    private void OnDisable()
+    {
+        if (_counter != null)
+        {
+            _counter.ValueChanged -= UpdateText;
+        }
     }
 }

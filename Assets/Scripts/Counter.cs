@@ -14,7 +14,7 @@ public class Counter : MonoBehaviour
     private Coroutine _coroutine;
     private int _currentValue;
 
-    public event UnityAction<int> OnValueChange;
+    public event UnityAction<int> ValueChanged;
 
     private void Awake()
     {
@@ -44,7 +44,7 @@ public class Counter : MonoBehaviour
         while (enabled)
         {
             _currentValue++;
-            OnValueChange?.Invoke(_currentValue);
+            ValueChanged?.Invoke(_currentValue);
             yield return _wait;            
         }
     }
