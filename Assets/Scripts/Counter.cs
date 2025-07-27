@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Counter : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private float _delay = 0.5f;
 
     private WaitForSeconds _wait;
@@ -14,10 +14,11 @@ public class Counter : MonoBehaviour
     private Coroutine _coroutine;
     private int _currentValue;
 
+    public event UnityAction<int> OnValueChange;
+
     private void Awake()
     {
         _wait = new WaitForSeconds(_delay);
-        _text.text = "0";
         _currentValue = 0;
     }
 
@@ -40,11 +41,11 @@ public class Counter : MonoBehaviour
 
     private IEnumerator Count()
     {
-        while (_currentValue < int.MaxValue)
+        while (enabled)
         {
-            _text.text = _currentValue.ToString();
-            yield return _wait;
             _currentValue++;
+            OnValueChange?.Invoke(_currentValue);
+            yield return _wait;            
         }
     }
 }
