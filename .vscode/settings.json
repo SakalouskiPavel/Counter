@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Counter.sln"
+    "dotnet.defaultSolution": "Counter.sln",
+    "dotnet.preferCSharpExtension": true
 }
