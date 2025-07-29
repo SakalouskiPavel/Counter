@@ -491,6 +491,7 @@ GameObject:
   - component: {fileID: 2062515381}
   - component: {fileID: 2062515383}
   - component: {fileID: 2062515380}
+  - component: {fileID: 2062515384}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -530,6 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 0.5
+  _inputReader: {fileID: 2062515384}
 --- !u!114 &2062515381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,6 +643,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 2062515381}
   _counter: {fileID: 2062515380}
+--- !u!114 &2062515384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062515378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6c0e603fa63974bb4f691c8efffe7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

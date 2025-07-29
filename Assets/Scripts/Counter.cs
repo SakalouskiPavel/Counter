@@ -5,9 +5,9 @@ using UnityEngine.Events;
 public class Counter : MonoBehaviour
 {
     [SerializeField] private float _delay = 0.5f;
+    [SerializeField] private InputReader _inputReader;
 
     private WaitForSeconds _wait;
-    private bool _isWork = false;
     private Coroutine _coroutine;
     private int _currentValue;
 
@@ -17,23 +17,7 @@ public class Counter : MonoBehaviour
     {
         _wait = new WaitForSeconds(_delay);
         _currentValue = 0;
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (_isWork)
-            {
-                StopCoroutine(_coroutine);
-                _isWork = false;
-            }
-            else
-            {
-                _coroutine = StartCoroutine(Count());
-                _isWork = true;
-            }
-        }
+        _inputReader.LeftMouseButtonDown += ToggleCoroutine;
     }
 
     private IEnumerator Count()
@@ -43,6 +27,19 @@ public class Counter : MonoBehaviour
             _currentValue++;
             ValueChanged?.Invoke(_currentValue);
             yield return _wait;            
+        }
+    }
+
+    private void ToggleCoroutine()
+    {
+        if (_coroutine == null)
+        {
+            _coroutine = StartCoroutine(Count());
+        }
+        else
+        {
+            StopCoroutine(_coroutine);
+            _coroutine = null;           
         }
     }
 }
